@@ -1,0 +1,12 @@
+.toggle-button:selected {
+    -fx-background-color: green;
+}
+
+.progress-bar > .bar {
+    -fx-background-color: -fx-box-border,
+    linear-gradient(to right,darkred, green 50%)
+
+}
+.progress-bar > .bar {
+    -fx-background-color: green
+}
