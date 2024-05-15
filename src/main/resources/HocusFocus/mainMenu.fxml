@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -36,6 +37,10 @@
                      </VBox.margin>
                   </Label>
                   <ToggleButton id="bt_taskmonitor" mnemonicParsing="false" onAction="#toggleTaskMonitor" stylesheets="@application.css">
+                     <tooltip><Tooltip autoFix="false" text="Task monitor" showDelay="250ms" /></tooltip>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
                      <graphic>
                         <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -48,6 +53,7 @@
                      </VBox.margin>
                   </ToggleButton>
                   <Button id="bt_rakendused" mnemonicParsing="false" onAction="#switchToRakendused" prefWidth="115.0" stylesheets="@application.css" text="Rakendused">
+                     <tooltip><Tooltip autoFix="false" text="Näita rakenduste nimekirja, kust on võimalike neid ka avada." showDelay="250ms" /></tooltip>
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
@@ -58,6 +64,8 @@
                         <Font size="16.0" />
                      </font></Button>
                   <Button id="bt_lucky" mnemonicParsing="false" onAction="#openRandom" prefWidth="115.0" stylesheets="@application.css" text="Feelin Lucky?">
+                     <tooltip><Tooltip wrapText="true" autoFix="false" text="Positiivse skoori puhul avaneb juhuslik äpp rakenduste nimekirjast" showDelay="250ms" /></tooltip>
+
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -69,6 +77,7 @@
                      </VBox.margin>
                   </Button>
                   <Button id="bt_setup" mnemonicParsing="false" onAction="#switchToSetup" prefWidth="115.0" stylesheets="@application.css" text="Algseadistus">
+                     <tooltip><Tooltip maxWidth="300" wrapText="true" autoFix="false" text="Tee uuesti algseadistus, kus leitakse kõik programmid arvutist ning pead ise otsustama, millised neist on produktiivsed ja millised mitte" showDelay="250ms" /></tooltip>
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
@@ -79,6 +88,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
                   <Button mnemonicParsing="false" onAction="#exit" prefWidth="115.0" stylesheets="@application.css" text="Välju">
+                     <tooltip><Tooltip autoFix="false" text="Peata töö ja sulge" showDelay="250ms" /></tooltip>
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>

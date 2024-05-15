@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class Main extends Application {
     public static TaskMonitor taskmonitor;
@@ -50,7 +51,7 @@ public class Main extends Application {
         taskmonitor = new TaskMonitor();
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainMenu.fxml")));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
