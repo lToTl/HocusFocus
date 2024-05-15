@@ -6,27 +6,17 @@ package HocusFocus;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
-import javafx.embed.swing.SwingFXUtils;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 
 public class SceneController {
@@ -46,12 +36,18 @@ public class SceneController {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
         stage.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-        if (Main.taskmonitor.isRunning()){
+        if (Main.taskmonitor != null && Main.taskmonitor.isRunning()){
             ((ToggleButton)stage.getScene().lookup("#bt_taskmonitor")).setSelected(true);
             stage.getScene().lookup("#bt_setup").setDisable(true);
         }
         ProgressBar progressBar = (ProgressBar)stage.getScene().lookup("#progress_bar");
         Label skoor = ((Label)stage.getScene().lookup("#skoor"));
+        File f = new File("rakendused.txt");
+        if (!f.isFile()){
+            stage.getScene().lookup("#bt_taskmonitor").setDisable(true);
+            stage.getScene().lookup("#bt_rakendused").setDisable(true);
+            stage.getScene().lookup("#bt_lucky").setDisable(true);
+        }
 
 
 //        ((ProgressBar)stage.getScene().lookup("#progress_bar")).progressProperty().bind(Main.taskmonitor.skoorP);
@@ -61,7 +57,7 @@ public class SceneController {
         Main.updater(progressBar, skoor);
     }
 
-    public void switchToRakendused(ActionEvent event) throws IOException, InterruptedException {
+    public void switchToRakendused(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("rakendused.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
@@ -107,7 +103,7 @@ public class SceneController {
     //phind.com
 
     public void exit(){
-        if (Main.taskmonitor.isRunning()) Main.taskmonitor.stop();
+        if (Main.taskmonitor != null && Main.taskmonitor.isRunning()) Main.taskmonitor.stop();
         Main.exit();
     }
 }

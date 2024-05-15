@@ -10,4 +10,9 @@
       </profile>
     </annotationProcessing>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="HocusFocus" options="--add-exports java.desktop/sun.awt.shell=org.example.oop2024_rt2" />
+    </option>
+  </component>
 </project>

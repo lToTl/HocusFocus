@@ -21,14 +21,16 @@ public class Main extends Application {
     public static void updater(ProgressBar progressBar, Label skoor){
         Thread updater_thread = new Thread(() -> {
             while (true) {
-                try {
-                    Thread.sleep(100);
-                    Platform.runLater(()->{
-                        progressBar.setProgress(taskmonitor.getProgress());
-                        skoor.textProperty().setValue(taskmonitor.getSkoorString());
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (Main.taskmonitor != null) {
+                    try {
+                        Thread.sleep(100);
+                        Platform.runLater(() -> {
+                            progressBar.setProgress(taskmonitor.getProgress());
+                            skoor.textProperty().setValue(taskmonitor.getSkoorString());
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -44,11 +46,14 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         File f = new File("rakendused.txt"); //kontrolli rakendused.txt olemasolu ja vajadusel loo see
-        if (!f.isFile()) { // kui rakendused.txt on puudu, siis tee setup ja loo rakendused.txt
-            Setup_GUI.LooRakendusedTXT();
+//        if (!f.isFile()) { // kui rakendused.txt on puudu, siis tee setup ja loo rakendused.txt
+//            Setup_GUI.LooRakendusedTXT();
+//        }
+        if(f.isFile()) {
+            programmid = Abi.loeFailListi("rakendused.txt");
+            taskmonitor = new TaskMonitor();
         }
-        programmid = Abi.loeFailListi("rakendused.txt");
-        taskmonitor = new TaskMonitor();
+
 
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainMenu.fxml")));
@@ -63,7 +68,12 @@ public class Main extends Application {
 //            ((Label)stage.getScene().lookup("#skoor")).textProperty().bind(Main.taskmonitor.skoorS);
             stage.show();
             updater(progressBar,skoor);
+            if (!f.isFile()){
+                stage.getScene().lookup("#bt_taskmonitor").setDisable(true);
+                stage.getScene().lookup("#bt_rakendused").setDisable(true);
+                stage.getScene().lookup("#bt_lucky").setDisable(true);
 
+            }
         } catch (Exception e){
             e.printStackTrace();
         }

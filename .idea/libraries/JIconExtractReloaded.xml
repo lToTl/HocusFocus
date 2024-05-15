@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="JIconExtractReloaded">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/JIconExtractReloaded.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
