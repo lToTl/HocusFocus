@@ -2,6 +2,7 @@
 //https://stackoverflow.com/questions/38973133/javafx-resizing-to-maximized-each-time-scene-changes
 //https://stackoverflow.com/questions/14413040/converting-integer-to-observablevalueinteger-in-javafx
 //https://stackoverflow.com/questions/11662857/javafx-2-1-messagebox/36137669#36137669
+//https://github.com/xdsswar/fxml-tutorial/tree/master
 package HocusFocus;
 
 import javafx.application.Platform;
@@ -14,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
@@ -24,10 +24,12 @@ public class SceneController {
 
 
     public void switchToSetup(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("setup.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("setup1.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
         stage.show();
+        showSetupInstruction();
+
     }
 
     public void switchToMain(ActionEvent event) throws IOException {
@@ -79,6 +81,7 @@ public class SceneController {
     }
 
     public void openRandom(ActionEvent event){
+
         if (Main.taskmonitor.getSkoor() < 1) {
             showAlert();
         } else {
@@ -98,7 +101,17 @@ public class SceneController {
         });
     }
 
-
+    private void showSetupInstruction() {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Algseadistus");
+                alert.setHeaderText("Järgnevalt on kuvatud kõik leitud programmid");
+                alert.setContentText("Vali programmid, mida soovid kontrollida. Jätkamiseks vajuta esimese rea esimest nuppu");
+                alert.showAndWait();
+            }
+        });
+    }
 
     //phind.com
 

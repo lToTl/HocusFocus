@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HocusFocus.Setup2Controller">
+   <ScrollPane hbarPolicy="NEVER" maxWidth="-Infinity" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
+      <GridPane id="buttonGridPane" fx:id="buttonGridPane" gridLinesVisible="true" HBox.hgrow="ALWAYS">
+
+      </GridPane>
+   </ScrollPane>
+</HBox>

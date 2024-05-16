@@ -6,7 +6,6 @@
 package HocusFocus;
 
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,14 +13,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.util.Duration;
+import me.marnic.jiconextract2.JIconExtract;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,12 +33,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-import javafx.stage.Window;
-import javafx.util.Duration;
-import me.marnic.jiconextract2.*;
 
 
 public class RakendusedController implements Initializable {
@@ -57,7 +54,7 @@ public class RakendusedController implements Initializable {
     public void generateButtons(List<String[]> programmid) throws FileNotFoundException {
         int veerud = 5;
 //        int read = (int) Math.ceil(programmid.size()/(double) veerud);
-        int veeruIndeks = 1;
+        int veeruIndeks = 0;
         int reaIndeks = 0;
         int i = 0;
         double aknaLaius = Window.getWindows().getFirst().getWidth()*0.93;
@@ -83,21 +80,29 @@ public class RakendusedController implements Initializable {
         for (String[] programm : programmid) {
             Button button = new Button();
             File file = new File(programm[1]);
-            if (programm[1].length() - programm[1].indexOf(".exe") == 4 && file.exists()){
-                ImageView imageView = exeToImage(programm[1]);
+            if (file.exists()){
+                ImageView imageView = Abi.exeToImage(programm[1]);
                 imageView.fitHeightProperty().bind(pildiSuurus);
                 imageView.fitWidthProperty().bind(pildiSuurus);
                 button.setGraphic(imageView);
+                if (programm[2].equals("0")){
+                    button.setBackground(new Background(new BackgroundFill(Color.DARKRED, null, null)));
+                }else{
+                    button.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
+
+                }
+
                 Tooltip tooltip = new Tooltip(programm[0]);
                 tooltip.setShowDelay(Duration.millis(100));
                 button.setTooltip(tooltip);
                 button.setPrefSize(suurus, suurus);
                 button.setOnAction(event -> Abi.käivita(programm[1]));
 
-                buttonGridPane.add(button, veeruIndeks, reaIndeks);
+
                 i++;
                 veeruIndeks = i % veerud;
                 reaIndeks = i / veerud;
+                buttonGridPane.add(button, veeruIndeks, reaIndeks);
             }
         }
     }
@@ -117,10 +122,7 @@ public class RakendusedController implements Initializable {
 //        return new ImageView(SwingFXUtils.toFXImage(bufferedImage, null));
 //    }
 
-    public static ImageView exeToImage (String aadress){
-        BufferedImage bufferedImage = JIconExtract.getIconForFile(128,128,aadress);
-        return new ImageView(SwingFXUtils.toFXImage(bufferedImage, null));
-    }
+
 
     public void switchToMain(ActionEvent event) throws IOException {
 

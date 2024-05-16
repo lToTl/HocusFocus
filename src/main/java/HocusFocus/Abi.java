@@ -1,6 +1,11 @@
 package HocusFocus;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.ImageView;
+import me.marnic.jiconextract2.JIconExtract;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -76,9 +81,15 @@ public class Abi {
     public static void käivitaSuvaline(List<String[]> programmid){
         int suvaline = (int) (Math.random()*programmid.size()); //genereeri juhuslik täisarv, mis vastaks ühele programmile nimekirjas
         System.out.println("avati rakendus: " + programmid.get(suvaline)[0]);
-        käivita(programmid.get(suvaline)[1]); // käivita juhuslik rakendus
+        String aadress = programmid.get(suvaline)[1].split(".exe",2)[0] + ".exe";
+        käivita(aadress); // käivita juhuslik rakendus
     }
     public static void sulge(String exeNimi){ // sulge
 
+    }
+
+    public static ImageView exeToImage (String aadress){
+        BufferedImage bufferedImage = JIconExtract.getIconForFile(128,128,aadress);
+        return new ImageView(SwingFXUtils.toFXImage(bufferedImage, null));
     }
 }

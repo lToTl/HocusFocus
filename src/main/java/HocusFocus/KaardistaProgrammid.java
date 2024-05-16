@@ -34,6 +34,7 @@ public class KaardistaProgrammid {
 //    inspireeritud ülemisest postitusest, käib rekursiivselt läbi kõik alamkaustad ja lisab leitud failid nimekirja.
     private static List<File> k6ikFailid(String directoryName, int rekursioone){
         File directory = new File(directoryName);
+        if (!directory.isDirectory()) return new ArrayList<>();
         // get all the files from a directory
         File[] fList = directory.listFiles();
         assert fList != null;
@@ -70,13 +71,15 @@ public class KaardistaProgrammid {
                     continue;
                 }
                 String sihtfail = shortcut.getRealFilename();
-                laiend = shortcut.getRealFilename().substring(sihtfail.length()-4);
-                if(laiend.equals(".exe")){
-                    String argumendid = shortcut.getCommandLineArguments();
-                    if(Objects.equals(argumendid, null))
-                        programmid.add(sihtfail);
-                    else
-                        programmid.add(sihtfail + " " + shortcut.getCommandLineArguments());
+                if(new File(sihtfail).isFile()) {
+                    laiend = shortcut.getRealFilename().substring(sihtfail.length() - 4);
+                    if (laiend.equals(".exe")) {
+                        String argumendid = shortcut.getCommandLineArguments();
+                        if (Objects.equals(argumendid, null))
+                            programmid.add(sihtfail);
+                        else
+                            programmid.add(sihtfail + " " + shortcut.getCommandLineArguments());
+                    }
                 }
             }
         }

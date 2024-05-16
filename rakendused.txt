@@ -1,2 +1,4 @@
+firefox.exe;C:\Program Files\Mozilla Firefox\firefox.exe;1
+notepad++.exe;C:\Program Files\Notepad++\notepad++.exe;0
+7zFM.exe;C:\Program Files\7-Zip\7zFM.exe;0
 vlc.exe;C:\Program Files\VideoLAN\VLC\vlc.exe;0
-Notepad.exe;C:\Program Files\WindowsApps\Microsoft.WindowsNotepad_11.2402.22.0_x64__8wekyb3d8bbwe\Notepad\Notepad.exe;1

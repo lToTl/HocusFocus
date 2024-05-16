@@ -11,17 +11,24 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Main extends Application {
     public static TaskMonitor taskmonitor;
     public static List<String[]> programmid;
+    public static List<String> uuedProgrammid = new ArrayList<>();
+
+    public static void addProgramm(String programm){
+        uuedProgrammid.add(programm);
+    }
+
 
     public static void updater(ProgressBar progressBar, Label skoor){
         Thread updater_thread = new Thread(() -> {
-            while (true) {
-                if (Main.taskmonitor != null) {
+            if (Main.taskmonitor != null) {
+                while (true) {
                     try {
                         Thread.sleep(100);
                         Platform.runLater(() -> {
@@ -31,6 +38,7 @@ public class Main extends Application {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
                 }
             }
         });
@@ -79,12 +87,7 @@ public class Main extends Application {
         }
 
     }
-    public void startTaskMonitor(TaskMonitor taskMonitor){
 
-    }
-    public void stopTaskMonitor(TaskMonitor taskMonitor){
-
-    }
     public static void exit(){
 
         Platform.exit();

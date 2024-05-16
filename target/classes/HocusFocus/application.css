@@ -1,5 +1,20 @@
-.toggle-button:selected {
+.toggle-button:pressed{
     -fx-background-color: green;
+}
+
+.toggle-button:selected {
+    -fx-background-color: darkgreen;
+}
+
+#setupButton.toggle-button{
+    -fx-background-color: darkred;
+}
+
+#setupButton.toggle-button:pressed{
+    -fx-background-color: green;
+}
+#setupButton.toggle-button:selected{
+    -fx-background-color: darkgreen;
 }
 
 .progress-bar > .bar {
